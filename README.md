@@ -1,2 +1,2 @@
-# aplsquared.github.io
-This is the IO
+# pSlide
+L Squared Slide - Progressive Web App

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" rel="stylesheet" href="./css/flex.css">
+    <link type="text/css" rel="stylesheet" href="./css/style.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="manifest" href="manifest.webmanifest">
+
+    <script type="text/javascript" src="./js/library/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="./js/library/device-uuid.min.js"></script>
+    <script type="text/javascript" src="./js/library/TweenMax.min.js"></script>
+    <script type="text/javascript" src="./js/common.js"></script>
+    <script type="text/javascript" src="./js/index.js"></script>
+    <script type="text/javascript" src="./js/idb.js"></script>
+
+    <title>L Squared Slide - PWA</title>
+  </head>
+  <body>
+    <div id="waiting"></div>
+    <div id="container"></div>
+    <div id="fs"></div>
+    <div id="em"></div>
+    <div id="toolbar">
+      <div class="refresh spin"></div>
+      <div class="offline" style="display:none;"></div>
+      <div class="download" style="display:none;"><span class="tooltip"></span></div>
+      <div class="client" style="display:none;"><span class="tooltip"></span></div>
+    </div>
+    <div id="logoBottom">
+      <img src="./img/logo-sm-colored.png">
+    </div>
+    <div id="identify">
+      <div style="font-size:24px;">L Squared Digital Signage</div>
+      <div>&nbsp;</div>
+      <div class="name">Name: <span class="marL5 value"></span></div>
+      <div class="mac">Id: <span class="marL5 value"></span></div>
+      <div class="server">Server: <span class="marL5 value"></span></div>
+      <div class="environment">Environment: <span class="marL5 value"></span></div>
+      <div>&nbsp;</div>
+      <div class="type">Type: <span class="marL5">Media Player</span></div>
+      <!-- <div class="model">Model: <span class="marL5 value"></span></div> -->
+      <div class="os">OS: <span class="marL5 value"></span></div>
+      <div class="client">L Squared Slide: <span class="marL5 value"></span></div>
+      <div class="ip">IP: <span class="marL5 value"></span></div>
+      <div>&nbsp;</div>
+      <div class="storage">Available Storage: <span class="marL5 value"></span></div>
+      <div class="status">Status: <span class="marL5 value"></span> <img src="./img/check.png" class="check"></div>
+    </div>
+    <div id="blank"></div>
+    <div id="dialog" class="lsn-dialog hide">
+      <div class="lsn-dialog-body" style="width:600px">
+        <section class="panel mac-quad">
+          <div class="panel-heading">Media Player Registration</div>
+          <div class="panel-body bg-icon">
+            <h1 class="text-lg noMarB">This media player is not registered to the L&nbsp;Squared&nbsp;Hub.</h1>
+            <p>You can log into the L&nbsp;Squared&nbsp;Hub through your desktop browser and add this device using the following device ID:</p>
+            <div class="id-quad">
+              <span>Device ID:</span> <span id="mac"></span>
+            </div>
+          </div>
+          <div class="panel-footer">
+            <p class="noMar">For help with setup, please email <span class="text-blue text-bold">support@LSquared.com</span> or call us at <span class="text-bold">1-877-344-1548</span> and select option 2 for customer service.</p>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div id="no-network" class="lsn-dialog hide">
+      <div class="lsn-dialog-body" style="width:600px">
+        <section class="panel mac-quad">
+          <div class="panel-heading">Internet Connection Problem</div>
+          <div class="panel-body no-network-bg-icon">
+            <div class="no-network">
+              <h1 class="text-lg">Can't Connect</h1>
+              <p>This device needs to be connected to the internet. Please connect a USB keyboard and mouse to the media player and follow these steps:</p>
+            </div>
+            <div class="introSlider">
+              <div><img src="img/no-network-intro1.png"/></div>
+              <div><img src="img/no-network-intro2.png"/></div>
+              <div><img src="img/no-network-intro3.png"/></div>
+            </ul>
+          </div>
+          <div class="panel-footer">
+            <p class="noMar">For help with setup, please email <span class="text-blue text-bold">support@LSquared.com</span> or call us at <span class="text-bold">1-855-500-3556</span> and select option 2 for customer service.</p>
+          </div>
+        </section>
+      </div>
+    </div>
+    <script type="text/javascript" src="./js/frame.js"></script>
+    <script type="text/javascript" src="./js/widgets/imgLoader.js"></script>
+    <script type="text/javascript" src="./js/widgets/vidLoader.js"></script>
+    <script type="text/javascript" src="./js/widgets/templates.js"></script>
+    <script type="text/javascript" src="./js/widgets/audioLoader.js"></script>
+    <script type="text/javascript" src="./js/widgets/widgetBrowser.js"></script>
+    <script type="text/javascript" src="./js/widgets/widgetCount.js"></script>
+    <script type="text/javascript" src="./js/widgets/widgetCrawlingText.js"></script>
+    <script type="text/javascript" src="./js/widgets/widgetDateTime.js"></script>
+    <script type="text/javascript" src="./js/widgets/widgetExcel.js"></script>
+    <script type="text/javascript" src="./js/widgets/widgetFillerContent.js"></script>
+    <script type="text/javascript" src="./js/widgets/widgetFlight.js"></script>
+    <script type="text/javascript" src="./js/widgets/widgetListView.js"></script>
+    <script type="text/javascript" src="./js/widgets/widgetLiveStream.js"></script>
+    <script type="text/javascript" src="./js/widgets/widgetMeetingRB.js"></script>
+    <script type="text/javascript" src="./js/widgets/widgetMeetingWB.js"></script>
+    <script type="text/javascript" src="./js/widgets/widgetMessage.js"></script>
+
+    <script type="text/javascript" src="./js/widgets/widgetOpenHour.js"></script>
+    <script type="text/javascript" src="./js/widgets/widgetQueue.js"></script>
+    <script type="text/javascript" src="./js/widgets/widgetQuote.js"></script>
+    <script type="text/javascript" src="./js/widgets/widgetRadio.js"></script>
+    <script type="text/javascript" src="./js/widgets/widgetStock.js"></script>
+    <script type="text/javascript" src="./js/widgets/widgetSurvey.js"></script>
+    <script type="text/javascript" src="./js/widgets/widgetText.js"></script>
+    <script type="text/javascript" src="./js/widgets/widgetThumbView.js"></script>
+    <script type="text/javascript" src="./js/widgets/widgetWeather.js"></script>
+    <script type="text/javascript" src="./js/widgets/widgetWebCam.js"></script>
+
+
+    <script type="text/javascript">
+      if('serviceWorker' in navigator){ // Register A service worker
+        window.addEventListener('load', function(){
+          const prefix = location.pathname.replace(/\/(index\.html)?$/, '');
+          navigator.serviceWorker.register('sw.js')
+            .then(function(registration) {
+              // Registration was successful
+              console.log('[success] scope: ', registration.scope);
+            }, function(err) {
+              // registration failed :(
+              console.log('[fail]: ', err);
+            });
+        });
+      }
+      console.log('index.js modified');
+    </script>
+    
+  </body>
+</html>

@@ -5,10 +5,10 @@
 // var bucket = "/dev-lsquared-hub/";
 
 /*RC*/
-// var storageHost = "https://rc.lsquared.com";
-// var apiPath = "https://rc.lsquared.com/api/v1/feed";
-// var environment = "LS-AZCARC-1001";
-// var bucket = "/rc-lsquared-hub/";
+var storageHost = "https://rc.lsquared.com";
+var apiPath = "https://rc.lsquared.com/api/v1/feed";
+var environment = "LS-AZCARC-1001";
+var bucket = "/rc-lsquared-hub/";
 
 /*US*/
 // var storageHost = "https://us.lsquared.com";
@@ -17,10 +17,10 @@
 // var bucket = "/lsquared-hub/";
 
 /*Hub*/
-var storageHost = "https://pwahub.lsquared.com";
-var apiPath = "https://pwahub.lsquared.com/api/v1/feed";
-var environment = "LS-AWUSPRO-1001";
-var bucket = "/lsquared-hub/";
+// var storageHost = "https://pwahub.lsquared.com";
+// var apiPath = "https://pwahub.lsquared.com/api/v1/feed";
+// var environment = "LS-AWUSPRO-1001";
+// var bucket = "/lsquared-hub/";
 
 var clientVersion = "2.1.4";
 
@@ -244,21 +244,21 @@ function downloadNext(){
   }
 }
 
-function getStorageFx(){
-  if(navigator.storage && navigator.storage.estimate){
-    const quota = await navigator.storage.estimate();
-    // quota.usage -> Number of bytes used.
-    // quota.quota -> Maximum number of bytes available.
-    const percentageUsed = (quota.usage / quota.quota) * 100;
-    console.log(`You've used ${percentageUsed}% of the available storage.`);
-    logMsg(`You've used ${percentageUsed}% of the available storage.`);
-    const remaining = quota.quota - quota.usage;
-    console.log(`You can write up to ${remaining} more bytes.`);
-    logMsg(`You can write up to ${remaining} more bytes.`);
+// function getStorageFx(){
+//   if(navigator.storage && navigator.storage.estimate){
+//     const quota = await navigator.storage.estimate();
+//     // quota.usage -> Number of bytes used.
+//     // quota.quota -> Maximum number of bytes available.
+//     const percentageUsed = (quota.usage / quota.quota) * 100;
+//     console.log(`You've used ${percentageUsed}% of the available storage.`);
+//     logMsg(`You've used ${percentageUsed}% of the available storage.`);
+//     const remaining = quota.quota - quota.usage;
+//     console.log(`You can write up to ${remaining} more bytes.`);
+//     logMsg(`You can write up to ${remaining} more bytes.`);
 
-  }
-}
-getStorageFx();
+//   }
+// }
+// getStorageFx();
 
 function generatePlaylist(){
   tempActiveFrameList = "";

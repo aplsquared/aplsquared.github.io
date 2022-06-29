@@ -125,7 +125,8 @@ function updateCount() {
     }).catch((err) => {
       console.error('*** Unable to update IDB count ***', err);
     }).then(() => {
-      return caches.open('my-cache');
+      // return caches.open('my-cache');
+      return;
     }).then((cache) => {
       return cache.keys();
     }).then((keys) => {

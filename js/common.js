@@ -203,5 +203,8 @@ function waitingTxtFx(){
 
 function logMsg(msg){
   logMsgObj = {mac:mac, message:msg};
+
+  console.warn(logMsgObj);
+  
   $.post(apiPath + "/saveDeviceMessage", logMsgObj, function(data){});
 }

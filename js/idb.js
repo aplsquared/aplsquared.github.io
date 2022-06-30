@@ -9,46 +9,11 @@ if(!window.indexedDB){
   window.alert("Your browser doesn't support a stable version of IndexedDB.")
 }
 
-const dbName = 'LSquaredIDB';
-// const dbExisting = (await window.indexedDB.databases()).map(db => db.name).includes(dbName);
 var db;
 var mac;
 
-// var diractory = "/pSlide";
-
-// // console.log(dbExisting);
-// var appImgArr = [
-//   {id:0, name:'bg-p', src:'/img/bg-p.png'},
-//   {id:1, name:'bg', src:'/img/bg.png'},
-//   {id:2, name:'cal-na', src:'/img/cal-na.png'},
-//   // '/img/calendar.svg',
-//   {id:3, name:'check-white', src:'/img/check-white.png'},
-//   {id:4, name:'check', src:'/img/check.png'},
-//   {id:5, name:'client-update', src:'/img/client-update.png'},
-//   // '/img/clock.svg',
-//   {id:6, name:'download', src:'/img/download.gif'},
-//   {id:7, name:'error', src:'/img/error.png'},
-//   // '/img/fb.svg',
-//   // '/img/flight.svg',
-//   {id:8, name:'info', src:'/img/info.png'},
-//   {id:9, name:'insta', src:'/img/insta.png'},
-//   // '/img/instagram.svg',
-//   // '/img/linkedin.svg',
-//   {id:10, name:'loading', src:'/img/loading.png'},
-//   {id:11, name:'logo-sm-colored', src:'/img/logo-sm-colored.png'},
-//   {id:12, name:'logo', src:'/img/logo.ico'},
-//   {id:13, name:'network-off', src:'/img/network-off.png'},
-//   // '/img/next.svg',
-//   {id:14, name:'no-network-intro1', src:'/img/no-network-intro1.png'},
-//   {id:15, name:'no-network-intro2', src:'/img/no-network-intro2.png'},
-//   {id:16, name:'no-network-intro3', src:'/img/no-network-intro3.png'},
-//   {id:17, name:'no-network', src:'/img/no-network.png'},
-//   {id:18, name:'spectrum-next', src:'/img/spectrum-next.png'},
-//   {id:19, name:'squared', src:'/img/squared.png'},
-//   // '/img/twitter.svg',
-//   {id:20, name:'webos-logo', src:'/img/webos-logo.jpg'}
-//   // '/img/wifi.svg'
-// ]
+const dbName = 'LSquaredIDB';
+// const dbExisting = (await window.indexedDB.databases()).map(db => db.name).includes(dbName);
 
 databaseExists(dbName, function(yesno){
   if(!yesno){
@@ -151,8 +116,9 @@ function databaseExists(dbname, callback){
   var existed = true;
   req.onsuccess = function (){
     req.result.close();
-    if (!existed)
+    if(!existed){
       indexedDB.deleteDatabase(dbname);
+    }
     callback(existed);
   }
   req.onupgradeneeded = function (){
@@ -219,24 +185,7 @@ async function fetchMedia(id){
   };
 }
 
-function read(){
-  var transaction = db.transaction(["employee"]);
-  var objectStore = transaction.objectStore("employee");
-  var request = objectStore.get("00-03");
 
-  request.onerror = function(event){
-    console.error("Unable to retrieve daa from database!");
-  };
-
-  request.onsuccess = function(event){
-    // Do something with the request.result!
-    if(request.result){
-      console.log("Name: " + request.result.name + ", Age: " + request.result.age + ", Email: " + request.result.email);
-    } else {
-      console.error("Kenny couldn't be found in your database!");
-    }
-  };
-}
 
 function readMac(){
   var transaction = db.transaction(["config"]);
@@ -422,32 +371,6 @@ function readIDBWeather(wId){
   };
 }
 
-
-
-function add(){
-  var request = db.transaction(["employee"], "readwrite")
-  .objectStore("employee")
-  .add({ id: "00-03", name: "Kenny", age: 19, email: "kenny@planet.org" });
-
-  request.onsuccess = function(event){
-    console.log("Kenny has been added to your database.");
-  };
-
-  request.onerror = function(event){
-    console.log("Unable to add data\r\nKenny is aready exist in your database! ");
-  }
-}
-
-function remove(){
-  var request = db.transaction(["employee"], "readwrite")
-  .objectStore("employee")
-  .delete("00-03");
-
-  request.onsuccess = function(event){
-    console.log("Kenny's entry has been removed from your database.");
-  };
-}
-
 function removeMedia(id){
   var request = db.transaction(["media"], "readwrite")
   .objectStore("media")
@@ -467,3 +390,50 @@ function removeFeed(id){
     console.log("Feed removed");
   };
 }
+
+
+
+
+function add(){
+  var request = db.transaction(["employee"], "readwrite")
+  .objectStore("employee")
+  .add({ id: "00-03", name: "Kenny", age: 19, email: "kenny@planet.org" });
+
+  request.onsuccess = function(event){
+    console.log("Kenny has been added to your database.");
+  };
+
+  request.onerror = function(event){
+    console.log("Unable to add data\r\nKenny is aready exist in your database! ");
+  }
+}
+
+function read(){
+  var transaction = db.transaction(["employee"]);
+  var objectStore = transaction.objectStore("employee");
+  var request = objectStore.get("00-03");
+
+  request.onerror = function(event){
+    console.error("Unable to retrieve daa from database!");
+  };
+
+  request.onsuccess = function(event){
+    // Do something with the request.result!
+    if(request.result){
+      console.log("Name: " + request.result.name + ", Age: " + request.result.age + ", Email: " + request.result.email);
+    } else {
+      console.error("Kenny couldn't be found in your database!");
+    }
+  };
+}
+
+function remove(){
+  var request = db.transaction(["employee"], "readwrite")
+  .objectStore("employee")
+  .delete("00-03");
+
+  request.onsuccess = function(event){
+    console.log("Kenny's entry has been removed from your database.");
+  };
+}
+

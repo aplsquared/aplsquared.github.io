@@ -68,46 +68,6 @@ var fileList = [];
 var frameArr = [];
 var feed = {};
 
-if('wakeLock' in navigator){
-  let lock;
-
-  console.log(`Release button pressed.`);
-
-  // button.addEventListener('click', async () => {
-    // if (lock) {
-    //   console.log(`Release button pressed.`);
-    //   lock.release();
-    //   return;
-    // }
-    requestWakeLock = async function(){
-      try {
-        console.log(`Acquire button pressed.`);
-        lock = await navigator.wakeLock.request('screen');
-        // label.textContent = 'Acquired';
-        console.log(`lock acquired.`);
-        logMsg(`#Lock Acquired.`);
-
-        lock.addEventListener('release', () => {
-          // label.textContent = 'Released';
-          console.log(`lock released.`);
-          logMsg(`#Lock released.`);
-          lock = null;
-        });
-      } catch (e) {
-        // label.textContent = `${e.name}: ${e.message}`;
-        console.log(`Caught ${e.name} lock: ${e.message}`);
-        logMsg(`${e.name}, ${e.message}`);
-      }
-    // });
-    }
-    
-
-} else{
-  // label.textContent = 'Not supported';
-  console.error('Not supported');
-  logMsg('WakeLock Not supported');
-}
-
 function readyToStart(){
   curDate = new Date();
   deviceInfo = {mac:mac, app:clientVersion, os:4, client:4, res:screenW + "x" + screenH, appStart:curDate.getTime(), info:{}};
@@ -115,7 +75,7 @@ function readyToStart(){
   setTimeout(function(){getPlaylist(true)}, 2000);
   setTimeout(function(){setDeviceInfo()}, 20000);
   setInterval(function(){getPlaylist()}, 30000);
-  setTimeout(function(){requestWakeLock()}, 2000);
+  setTimeout(function(){wakeLockFx()}, 2000);
   
 }
 

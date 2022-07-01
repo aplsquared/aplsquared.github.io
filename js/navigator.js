@@ -9,6 +9,8 @@ function wakeLockFx(){
       console.warn(wakeLock);
       
       if(!wakeLock || wakeLock.released){
+        console.log(navigator);
+        console.warn(navigator.wakeLock);
         wakeLock = await navigator.wakeLock.request("screen");
         console.log("Wake Lock is acquired.");
         logMsg("Wake Lock is acquired.");

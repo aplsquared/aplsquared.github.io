@@ -70,6 +70,8 @@ var feed = {};
 
 function readyToStart(){
   curDate = new Date();
+// ip.address()
+  deviceInfo = {mac:mac, app:clientVersion, os:4, client:4, res:screenW + "x" + screenH, computerName:"", local_addr:"", appStart:curDate.getTime(), info:{DiskTotal:"", DiskUsed:"", MemoryTotal:"", MemoryUsed:""}};
   deviceInfo = {mac:mac, app:clientVersion, os:4, client:4, res:screenW + "x" + screenH, appStart:curDate.getTime(), info:{}};
   // setTimeout(function(){loadLocalFeed();}, getNearestMinuteDiff());
   setTimeout(function(){getPlaylist(true)}, 2000);

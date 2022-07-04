@@ -34,11 +34,17 @@ window.addEventListener('offline', ()=>{
 function updateToolbar(item, status){
   if(status){
     $("#toolbar ." + item).show();
+    if(item == "download"){
+      $(".downloadInfo").show();
+    }
     if(item == "refresh"){
       $("#toolbar .refresh").addClass("spin");
     }
   } else{
     $("#toolbar ." + item).hide();
+    if(item == "download"){
+      $(".downloadInfo").hide();
+    }
     if(item == "refresh"){
       $("#toolbar .refresh").removeClass("spin");
     }

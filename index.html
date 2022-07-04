@@ -8,9 +8,12 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="manifest" href="manifest.webmanifest">
 
+    <script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+
     <script type="text/javascript" src="./js/library/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="./js/library/device-uuid.min.js"></script>
     <script type="text/javascript" src="./js/library/TweenMax.min.js"></script>
+    <script type="text/javascript" src="./js/library/address.js"></script>
 
     <script type="text/javascript" src="./js/navigator.js"></script>
 
@@ -21,7 +24,7 @@
     
     
 
-    <script type="module">
+    <!-- <script type="module">
       import { get, set, clear, keys, del } from './js/library/esm.min.js';
       window.idbKV = {
         get: get,
@@ -30,119 +33,13 @@
         keys: keys,
         del: del
       };
-    </script>
+    </script> -->
 
     <!-- <script type="text/javascript" src="./js/script.js"></script> -->
 
     <title>L Squared Slide - PWA</title>
   </head>
   <body>
-
-    <p>
-      <b>Quota:</b>
-      <span id="quota">not supported</span><br>
-      <b>Used:</b>
-      <span id="used">not supported</span><br>
-      <b>Remaining:</b>
-      <span id="remaining">not supported</span>
-    </p>
-
-    <p>
-      <b>Items Stored:</b> (1MB each)<br>
-      <code id="countTotal">calculating...</code> (total) <br>
-      <code id="countIDB">calculating...</code> (IndexedDB) <br>
-      <code id="countCache">calculating...</code> (Cache API) <br>
-      <code id="countLocalStorage">calculating...</code> (LocalStorage) <br>
-      <code id="countSessionStorage">calculating...</code> (SessionStorage)
-    </p>
-
-
-    <div>
-      <div>
-        IndexedDB
-      </div>
-      <button id="buttAddIDB" type="button">
-        Add 1MB
-      </button>
-      <button id="buttFillIDB" type="button">
-        Fill (<span id="fillIDBStatus">off</span>)
-      </button>
-      <button id="buttClearIDB" type="button" class="red">
-        Clear
-      </button>
-    </div>
-    
-    <div>
-      <div>
-        Cache Storage
-      </div>
-      <button id="buttAddCaches" type="button">
-        Add 1MB
-      </button>
-      <button id="buttFillCaches" type="button">
-        Fill (<span id="fillCachesStatus">off</span>)
-      </button>
-      <button id="buttClearCaches" type="button" class="red">
-        Clear
-      </button>
-    </div>
-    
-    <div>
-      <div class="inline-block">
-        <div>
-          Local Storage
-        </div>
-        <button id="buttAddLocal" type="button">
-          Add 1MB 
-        </button>
-        <button id="buttClearLocal" type="button" class="red">
-          Clear
-        </button>
-      </div>
-      <div class="inline-block">
-      <div>
-        Session Storage
-      </div>
-      <button id="buttAddSession" type="button">
-        Add 1MB
-      </button>
-      <button id="buttClearSession" type="button" class="red">
-        Clear
-      </button>
-      </div>
-    </div>
-    
-    <div>
-      <div>
-        Clear Storage
-      </div>
-      <button id="buttClear" type="button" class="red">
-        Clear All
-      </button>
-    </div>
-
-    <div>
-      <div>
-        Persistent Storage (<code id="persistResult">not supported</code>)
-      </div>
-      <button id="buttPersist" type="button" disabled>
-        Request
-      </button>
-      
-    </div> 
-    
-    <div>
-      <div>
-        Install
-      </div>
-      <button id="buttInstall" disabled type="button">
-        Install
-      </button>
-    </div>
-
-
-
-
     <div id="waiting"></div>
     <div id="container"></div>
     <div id="fs"></div>
@@ -151,8 +48,12 @@
       <div class="refresh spin"></div>
       <div class="offline" style="display:none;"></div>
       <div class="download" style="display:none;"><span class="tooltip"></span></div>
-      <div class="client" style="display:none;"><span class="tooltip"></span></div>
+      <div class="client" style="display:none;"><span class="tooltip"></span></div>      
     </div>
+    <div class="downloadInfo" style="display:none;font-size:7px;color:#002e4a;position:absolute;bottom:0px;right:6px;font-weight:600;">
+      <b>Storage</b> Used: <span id="used">N/A</span> | Remaining: <span id="remaining">N/A</span> | Total: <span id="quota">N/A</span>
+    </div>
+
     <div id="logoBottom">
       <img src="./img/logo-sm-colored.png">
     </div>
@@ -260,7 +161,7 @@
       console.log('index.js modified');
     </script>
 
-    <script type="text/javascript" src="./js/script.js"></script>
+    <!-- <script type="text/javascript" src="./js/script.js"></script> -->
 
     
     

@@ -138,6 +138,7 @@ function getPlaylist(init = false){
 }
 
 function setDeviceInfo(){
+  getStorageFx();
   $.post(apiPath + "/setDeviceInfo", deviceInfo, function(data){})
   .fail(function(){
     setTimeout(function(){setDeviceInfo()}, 30000);

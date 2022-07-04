@@ -108,6 +108,9 @@ function getStorageFx(){
       console.error("quota ", formatToMB(estimate.quota));
       console.error("usage ", formatToMB(estimate.usage));
       console.error("remaining ", formatToMB(remaining));
+
+      deviceInfo.info.DiskTotal = estimate.quota / 1024;
+      deviceInfo.info.DiskUsed = estimate.usage / 1024;
       
   
     }).catch((err) => {

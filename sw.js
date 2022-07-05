@@ -1,7 +1,9 @@
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.0.0/workbox-sw.js');
 const staticCacheName = 'LSquared-s-v1';
 const dynamicCacheName = 'LSquared-d-v1';
-const clientVersion = '2.0.16';
+const clientVersion = '2.0.17';
+
+// console.warn(new DeviceUUID().get());
 
 console.warn('SW loaded');
 

@@ -22,7 +22,7 @@ var apiPath = "https://hub.lsquared.com/api/v1/feed";
 var environment = "LS-AWUSPRO-1001";
 var bucket = "/lsquared-hub/";
 
-var clientVersion = "2.0.16";
+var clientVersion = "2.0.17";
 
 var tzname = "Eastern Standard Time";
 var dateFormat = "mmddyyyy";

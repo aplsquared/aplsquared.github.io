@@ -19,14 +19,17 @@ function hasNetworkFx(caller, status){
   // }
 }
 window.addEventListener('load', ()=>{
+  console.error("load", navigator.onLine);
   hasNetworkFx('load', navigator.onLine);
   screenH = window.outerHeight;
   screenW = window.outerWidth;
 });
 window.addEventListener('online', ()=>{
+  console.error("online", navigator.onLine);
   hasNetworkFx('online', navigator.onLine);
 });
 window.addEventListener('offline', ()=>{
+  console.error("offline", navigator.onLine);
   hasNetworkFx('offline', navigator.onLine);
 });
 

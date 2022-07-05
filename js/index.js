@@ -5,10 +5,10 @@
 // var bucket = "/dev-lsquared-hub/";
 
 /*RC*/
-var storageHost = "https://rc.lsquared.com";
-var apiPath = "https://rc.lsquared.com/api/v1/feed";
-var environment = "LS-AZCARC-1001";
-var bucket = "/rc-lsquared-hub/";
+// var storageHost = "https://rc.lsquared.com";
+// var apiPath = "https://rc.lsquared.com/api/v1/feed";
+// var environment = "LS-AZCARC-1001";
+// var bucket = "/rc-lsquared-hub/";
 
 /*US*/
 // var storageHost = "https://us.lsquared.com";
@@ -17,12 +17,12 @@ var bucket = "/rc-lsquared-hub/";
 // var bucket = "/lsquared-hub/";
 
 /*Hub*/
-// var storageHost = "https://pwahub.lsquared.com";
-// var apiPath = "https://pwahub.lsquared.com/api/v1/feed";
-// var environment = "LS-AWUSPRO-1001";
-// var bucket = "/lsquared-hub/";
+var storageHost = "https://hub.lsquared.com";
+var apiPath = "https://hub.lsquared.com/api/v1/feed";
+var environment = "LS-AWUSPRO-1001";
+var bucket = "/lsquared-hub/";
 
-var clientVersion = "2.1.4";
+var clientVersion = "2.0.15";
 
 var tzname = "Eastern Standard Time";
 var dateFormat = "mmddyyyy";
@@ -97,6 +97,7 @@ function getPlaylist(init = false){
   $.get(apiEndpoint, function(data){
     updateToolbar("refresh", false);
     setOnlineStatus(true);
+    console.error("device status get sussecc");
     data = parseJSON(data);
 
     // logMsg("apiEndpoint: get true");
@@ -132,6 +133,7 @@ function getPlaylist(init = false){
   .fail(function(){
     updateToolbar("refresh", false);
     setOnlineStatus(false);
+    console.error("device status get fail");
     logMsg("apiEndpoint: get false");
     readIDBFeed();
   });
@@ -154,6 +156,7 @@ function setOnlineStatus(status){
     $("#identify .status .value").text("Offline");
     $("#identify .status .check").hide();
   }
+  console.error("setOnlineStatus ", !status);
   updateToolbar("offline", !status);
 }
 

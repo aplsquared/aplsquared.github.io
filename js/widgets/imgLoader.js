@@ -47,13 +47,23 @@ class ImgLoader{
     this.scaleX = this.prop.w / this.scaledW;
     this.scaleY = this.prop.h / this.scaledW;
 
-    if(this.scaleX < this.scaleY){
-      $(this.img).css({"transform-origin":"0 0", "transform":"scale("+ this.scaleX +","+ this.scaleX +")"});
-    } else{
-      $(this.img).css({"transform-origin":"0 0", "transform":"scale("+ this.scaleY +","+ this.scaleY +")"});
-    }
+
+    console.warn(this.scaleX < this.scaleY);
+
+    console.error(this.scaleX, " - ", this.scaleY);
+
+    // if(this.scaleX < this.scaleY){
+    //   $(this.img).css({"transform-origin":"0 0", "transform":"scale("+ this.scaleX +","+ this.scaleX +")"});
+    // } else{
+    //   $(this.img).css({"transform-origin":"0 0", "transform":"scale("+ this.scaleY +","+ this.scaleY +")"});
+    // }
+    
+    $(this.img).css({"object-fit":"scale-down", "width":"100%", "height":"100%"});
+
     this.scaledH = $(this.img)[0].getBoundingClientRect().height;
     this.scaledW = $(this.img)[0].getBoundingClientRect().width;
+
+    console.warn(this.scaledH, " - ", this.scaledW);
 
     if(this.xAlign == "l"){
       $(this.img).css("margin-left", "0px");

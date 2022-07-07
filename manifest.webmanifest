@@ -7,7 +7,7 @@
   "description": "L Squared Digital Signage client app for Chromebox and other Progressive Web App supported devices.",
   "scope": "/",
   "start_url": "/",
-  "varsion": "2.0.18",
+  "varsion": "2.0.19",
   "orientation": "any",
   "language": "English",
   "icons": [

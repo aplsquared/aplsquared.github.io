@@ -48,9 +48,9 @@ class ImgLoader{
     this.scaleY = this.prop.h / this.scaledW;
 
 
-    console.warn(this.scaleX < this.scaleY);
+    // console.warn(this.scaleX < this.scaleY);
 
-    console.error(this.scaleX, " - ", this.scaleY);
+    // console.error(this.scaleX, " - ", this.scaleY);
 
     // if(this.scaleX < this.scaleY){
     //   $(this.img).css({"transform-origin":"0 0", "transform":"scale("+ this.scaleX +","+ this.scaleX +")"});
@@ -63,7 +63,7 @@ class ImgLoader{
     this.scaledH = $(this.img)[0].getBoundingClientRect().height;
     this.scaledW = $(this.img)[0].getBoundingClientRect().width;
 
-    console.warn(this.scaledH, " - ", this.scaledW);
+    // console.warn(this.scaledH, " - ", this.scaledW);
 
     if(this.xAlign == "l"){
       $(this.img).css("margin-left", "0px");

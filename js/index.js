@@ -25,13 +25,15 @@ var bucket = "/lsquared-hub/";
 // Request URL: https://s3-us-west-2.amazonaws.com/lsquared-hub/feed/json/c025a51c1385.json?1657036989870
 // Request Method: GET
 
-var clientVersion = "2.0.18";
+var clientVersion = "2.0.19";
 
 var tzname = "Eastern Standard Time";
 var dateFormat = "mmddyyyy";
 var tz = "America/Toronto";
 
+var confirmContent = {items:[]};
 var unusedFilesRemoved = false;
+var isReportUploaded = false;
 var tempActiveFrameList = "";
 var isDownloading = false;
 var downloadedFiles = "";
@@ -75,7 +77,6 @@ function readyToStart(){
   curDate = new Date();
 // ip.address()
   deviceInfo = {mac:mac, app:clientVersion, os:4, client:4, res:screenW + "x" + screenH, computerName:"", local_addr:"", appStart:curDate.getTime(), info:{DiskTotal:"", DiskUsed:"", MemoryTotal:"", MemoryUsed:""}};
-  deviceInfo = {mac:mac, app:clientVersion, os:4, client:4, res:screenW + "x" + screenH, appStart:curDate.getTime(), info:{}};
   // setTimeout(function(){loadLocalFeed();}, getNearestMinuteDiff());
   setTimeout(function(){getPlaylist(true)}, 2000);
   setTimeout(function(){setDeviceInfo()}, 20000);
@@ -100,7 +101,7 @@ function getPlaylist(init = false){
   $.get(apiEndpoint, function(data){
     updateToolbar("refresh", false);
     setOnlineStatus(true);
-    console.error("device status get sussecc");
+    console.error("device status get success");
     data = parseJSON(data);
 
     // logMsg("apiEndpoint: get true");
@@ -254,22 +255,6 @@ function downloadNext(){
   }
 }
 
-// function getStorageFx(){
-//   if(navigator.storage && navigator.storage.estimate){
-//     const quota = await navigator.storage.estimate();
-//     // quota.usage -> Number of bytes used.
-//     // quota.quota -> Maximum number of bytes available.
-//     const percentageUsed = (quota.usage / quota.quota) * 100;
-//     console.log(`You've used ${percentageUsed}% of the available storage.`);
-//     logMsg(`You've used ${percentageUsed}% of the available storage.`);
-//     const remaining = quota.quota - quota.usage;
-//     console.log(`You can write up to ${remaining} more bytes.`);
-//     logMsg(`You can write up to ${remaining} more bytes.`);
-
-//   }
-// }
-// getStorageFx();
-
 function generatePlaylist(){
   tempActiveFrameList = "";
   curDate = new Date();
@@ -365,6 +350,7 @@ function generatePlaylist(){
     }
   }
 
+  console.warn("unusedFilesRemoved ", unusedFilesRemoved);
   if(!unusedFilesRemoved){
     console.log("remove unused");
     removeUnusedResources();
@@ -396,6 +382,41 @@ function removeUnusedResources(){
   }
   unusedFilesRemoved = true;
   //content confirmation
+  contentConfirmation();
+}
+
+function contentConfirmation(){
+  confirmContent = {items:[]};
+  fileList = [];
+
+  const lsnDBOpenRequest = window.indexedDB.open("LSquaredIDB");
+  lsnDBOpenRequest.onsuccess = function(event){
+    var db = lsnDBOpenRequest.result;
+    var mediaTransaction = db.transaction(["media"], "readonly");
+    var objectStore = mediaTransaction.objectStore("media");
+    var mediaRequest = objectStore.getAll();
+  
+    mediaRequest.onerror = function(event){
+      console.log("Unable to retrieve daa from database!");
+    };
+    mediaRequest.onsuccess = function(event){
+      fileList = event.target.result;
+      for(var i=0; i<fileList.length; i++){
+        for(var j=0; j<mediaList.length; j++){
+          if(fileList[i].name == mediaList[j].name){
+            cidArr = mediaList[j].id.split("-");
+            confirmContent.items.push({id:cidArr[cidArr.length - 1], label:mediaList[j].name, type:mediaList[j].type, ctime:fileList[i].ctime});
+          }
+        }
+      }
+      $.post(apiPath + "/contentConfirmation/" + mac, JSON.stringify(confirmContent), function(data){
+        setDeviceInfo();
+      })
+      .fail(function(){
+        setTimeout(function(){contentConfirmation()}, 35000);
+      });
+    }
+  };
 }
 
 function redraw(){

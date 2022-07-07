@@ -144,9 +144,9 @@ function getBlobURL(){
     };
 
     request.onsuccess = function(event){
-      var imgFile = event.target.result;
-      var imgURL = URL.createObjectURL(imgFile.file);
-      blobURLs.push({id:downloadedMediaArr[curMediaId].id, src:imgURL});
+      var mediaFile = event.target.result;
+      var fileURL = URL.createObjectURL(mediaFile.file);
+      blobURLs.push({id:downloadedMediaArr[curMediaId].id, src:fileURL});
       getNextBlob();
     };
   } else{
@@ -177,11 +177,9 @@ async function fetchMedia(id){
   };
 
   request.onsuccess = function(event){
-    var imgFile = event.target.result;
-    console.log(imgFile)
-    var imgURL = URL.createObjectURL(imgFile.file);
-    console.log(imgURL);
-    return imgURL;
+    var mediaFile = event.target.result;
+    var fileURL = URL.createObjectURL(mediaFile.file);
+    return fileURL;
   };
 }
 
@@ -306,21 +304,17 @@ function fetchFileFromNetwork(fetchData){
 function storeMediaFx(fileBlob, id, name, type){
   // Open transaction, get object store; make it a readwrite so we can write to the IDB
   const mediaObjStore = db.transaction(['media'], 'readwrite').objectStore('media');
-
+  const newDate = new Date();
   // Create a media record to add to the IDB
-  var record = {id:id, file:fileBlob, name:name, type:type};
-  console.warn("record ", record.name);
-  logMsg("C Downloading: " + record.name);
+  var record = {id:id, file:fileBlob, name:name, type:type, ctime:newDate.getUTCFullYear() + "/" + (newDate.getUTCMonth() + 1) + "/" + newDate.getUTCDate() + " " + newDate.getUTCHours() + ":" + newDate.getUTCMinutes() + ":" + newDate.getUTCSeconds()};
   // Add the record to the IDB using add()
   var request = mediaObjStore.add(record);
   request.addEventListener('success', ()=>{
     //console.log('Record addition attempt finished');
-    logMsg("C Downloaded: " + record.name);
     downloadNext();
   });
   request.addEventListener('error', ()=>{
     console.error(request.error);
-    logMsg("C Download Error: " + record.name);
     downloadNext();
   });
 }

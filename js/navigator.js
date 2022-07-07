@@ -6,13 +6,10 @@ function wakeLockFx(){
     let wakeLock;
   
     async function acquireLock(){
-      console.warn(wakeLock);
-      console.warn(wakeLock);
-
-      
+      // console.warn(wakeLock);
       if(!wakeLock || wakeLock.released){
-        console.log(navigator);
-        console.warn(navigator.wakeLock);
+        // console.log(navigator);
+        // console.warn(navigator.wakeLock);
         wakeLock = await navigator.wakeLock.request("screen");
         console.log("Wake Lock is acquired.");
         logMsg("Wake Lock is acquired.");
@@ -87,27 +84,27 @@ function getStorageFx(){
   const elemQuota = document.getElementById('quota');
   const elemUsed = document.getElementById('used');
   const elemRemaining = document.getElementById('remaining');
-  console.warn(elemQuota);
+  // console.warn(elemQuota);
 
 
   if('storage' in navigator){
-    console.log("Storage is supported.");
+    // console.log("Storage is supported.");
     
     navigator.storage.estimate().then((estimate) => {
-      console.warn(estimate);
-      console.log('quota', (estimate.usage / estimate.quota * 100).toFixed(2));
+      // console.warn(estimate);
+      // console.log('quota', (estimate.usage / estimate.quota * 100).toFixed(2));
   
       
-      elemQuota.textContent = "Helllo";
+      elemQuota.textContent = "";
       
       const remaining = estimate.quota - estimate.usage;
       elemQuota.textContent = formatToMB(estimate.quota);
       elemUsed.textContent = formatToMB(estimate.usage);
       elemRemaining.textContent = formatToMB(remaining);
       
-      console.error("quota ", formatToMB(estimate.quota));
-      console.error("usage ", formatToMB(estimate.usage));
-      console.error("remaining ", formatToMB(remaining));
+      // console.error("quota ", formatToMB(estimate.quota));
+      // console.error("usage ", formatToMB(estimate.usage));
+      // console.error("remaining ", formatToMB(remaining));
 
       deviceInfo.info.DiskTotal = estimate.quota / 1024;
       deviceInfo.info.DiskUsed = estimate.usage / 1024;
@@ -116,7 +113,7 @@ function getStorageFx(){
     }).catch((err) => {
       console.error('*** Unable to update quota ***', err);
     }).then(() => {
-      console.warn("Then");
+      // console.warn("Then");
     });
 
   } else{
